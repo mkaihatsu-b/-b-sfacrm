@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const { id, ...rest } = body
   if (id) {
-    const { data, error } = await supabase.from('members').update({ ...rest, updated_at: new Date().toISOString() }).eq('id', id).select().single()
+    const { data, error } = await supabase.from('members').update({ ...rest }).eq('id', id).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json(data)
   }
